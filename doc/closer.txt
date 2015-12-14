@@ -1,0 +1,18 @@
+*closer.txt*    Plugin for closing open buffers
+
+This plugin allows the user to close buffers quickly.  It opens another buffer
+that lists each buffer that is open.  You can select the buffer you want to
+close and press 'x'.  Once you have closed the buffers you desire, you can
+press 'q' to close the closer buffer.
+
+                                                *closer-mappings*
+The following mapping is suggested:
+
+nmap <silent> <localleader>c <Plug>OpenCloser
+    Opens the closer window
+
+                                                *closer-credit*
+Closer was developed by Chad Skeeters <github.com/cskeeters>.  Distributed
+under MIT License.
+
+vim:tw=78:fo=tcq2:ts=8:ft=help:norl:
