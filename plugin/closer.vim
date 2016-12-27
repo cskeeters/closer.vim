@@ -44,8 +44,9 @@ endfunction
 
 function! s:OpenCloser()
     "Open the Window
-    botright edit __CLOSER__
-    setl modifiable
+    botright enew
+    setlocal buftype=nofile filetype=closer
+    setlocal modifiable bufhidden=wipe nobuflisted noswapfile
 
     "Modify the lines
 
@@ -64,11 +65,9 @@ function! s:OpenCloser()
     endwhile
 
     "Set properties
+    setlocal nomodifiable
     normal gg
-    setl buftype=nofile
-    setl noswapfile
-    setl nomodifiable
-    setf diff
+    "setf diff
     nmap <buffer> x :call <SID>CloseLine()<cr>
     nmap <buffer> o :call <SID>OpenLine()<cr>
     nmap <buffer> q :bdelete<CR>
