@@ -3,6 +3,15 @@ if exists("loaded_closer")
 endif
 let loaded_closer = 1
 
+function! s:CloseCloser()
+    if exists(":Bdelete")
+        " vim-bbye
+        Bdelete
+    else
+        bdelete
+    endif
+endfunction
+
 function! s:OpenLine()
     let curlinenum = line(".")
     let m = matchlist(getline("."), '\v([0-9]+) .*')
@@ -10,10 +19,10 @@ function! s:OpenLine()
         let bn = eval(m[1])
         let bname = bufname(bn)
 
-        bdelete
+        call s:CloseCloser()
         execute "buffer ".bn
     else
-        bdelete
+        call s:CloseCloser()
     endif
 endfunction
 
@@ -70,7 +79,7 @@ function! s:OpenCloser()
     "setf diff
     nmap <buffer> x :call <SID>CloseLine()<cr>
     nmap <buffer> o :call <SID>OpenLine()<cr>
-    nmap <buffer> q :bdelete<CR>
+    nmap <buffer> q :call <SID>CloseCloser()<CR>
 endfunction
 
 noremap <unique> <script> <Plug>OpenCloser <SID>OpenCloser
